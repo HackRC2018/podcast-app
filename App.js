@@ -39,7 +39,7 @@ export default class App extends Component {
 // Styles
 const styles = StyleSheet.create({
     navBar: {
-        backgroundColor: '#CC5225',
+        backgroundColor: '#FA6511',
     },
     navBarButton: {
         tintColor: '#FFFFFF'

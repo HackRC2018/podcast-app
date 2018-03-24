@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     },
     header: {
         height: 64,
-        backgroundColor: '#CC5225'
+        backgroundColor: '#FA6511'
     },
     iconHeader: {
         marginTop: 28,

@@ -1,6 +1,6 @@
 // Lib imports
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View, Button, TouchableOpacity, ImageBackground } from 'react-native';
+import { Platform, StyleSheet, Text, View, Button, TouchableOpacity, ImageBackground, ScrollView } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 
 // App imports
@@ -10,7 +10,8 @@ import URL from './common/URL';
 // Styles
 const styles = StyleSheet.create({
     backgroundImage: {
-        flex: 1
+        flex: 1,
+        padding: 20
     },
     container: {
         flex: 1,
@@ -35,14 +36,14 @@ const styles = StyleSheet.create({
 class BubbleButton extends Component {
     render() {
         var styleButton = {
-            margin: 2,
             backgroundColor: 'rgba(255, 255, 255, 0.15)',
             width: this.props.size,
             height: this.props.size,
-            borderRadius: this.props.size / 2
+            borderRadius: 400
         };
         var styleText = {
-            fontSize: 20,
+            fontSize: this.props.size / 4,
+            fontWeight: '200',
             lineHeight: this.props.size,
             textAlign: 'center',
             color: '#FFFFFF'
@@ -67,6 +68,9 @@ class FirstPreferencesView extends Component {
         this.confirm = this.confirm.bind(this);
     }
     componentDidMount() {
+        this.fetchTags();
+    }
+    fetchTags() {
         fetch(URL.tags, {
             method: 'GET',
             headers: {
@@ -98,9 +102,8 @@ class FirstPreferencesView extends Component {
             },
             body: JSON.stringify(data)
         }).then((response) => {
-            tags.splice(indexTag, 1);
+            this.fetchTags();
             this.setState({
-                tags: tags,
                 tagSelected: this.state.tagSelected + 1
             });
             if (this.state.tagSelected === 5) {
@@ -123,11 +126,11 @@ class FirstPreferencesView extends Component {
                 <View style={styles.header}>
                     <Text style={styles.headerText}>Pointe ce que tu aimes</Text>
                 </View>
-                <Text>
+                <View>
                     <Text>
                        {bubbles}
                     </Text>
-                </Text>
+                </View>
             </ImageBackground>
         );
     }
