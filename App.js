@@ -11,9 +11,9 @@ import SettingsView from './src/SettingsView';
 
 const scenes = Actions.create(
     <Scene key="root" tabTitle="root">
-        <Scene key="main" component={LeftMenu} open={false} type={ActionConst.REPLACE}>
+        <Scene key="main" component={LeftMenu} open={false}>
             <Scene key="mainNavbar" navBar={NavBar} drawerImage={require('./src/resources/hamburger.png')} >
-                <Scene key="landing" component={LandingView} title="Hack Ton Podcast" initial />
+                <Scene key="landing" component={LandingView} title="Hack Ton Podcast" type={ActionConst.REPLACE} initial />
                 <Scene key="browse" component={BrowseView} title="Parcourir" type={ActionConst.REPLACE} />
                 <Scene key="settings" component={SettingsView} title="Réglages" type={ActionConst.REPLACE} />
             </Scene>
