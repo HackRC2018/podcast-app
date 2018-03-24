@@ -1,23 +1,5 @@
 import React, { Component } from 'react';
-import {
-    Platform,
-    StyleSheet,
-    Text,
-    View
-} from 'react-native';
-
-
-class LandingView extends Component {
-    render() {
-        return (
-            <View style={styles.container}>
-                <Text>
-                    Settings
-                </Text>
-            </View>
-        );
-    }
-}
+import { Platform, StyleSheet, Text, View } from 'react-native';
 
 
 // Styles
@@ -29,5 +11,18 @@ const styles = StyleSheet.create({
         backgroundColor: '#F5FCFF',
     }
 });
+
+
+class LandingView extends Component {
+    render() {
+        return (
+            <View style={styles.container}>
+                <Text>
+                    Réglages
+                </Text>
+            </View>
+        );
+    }
+}
 
 export default LandingView;

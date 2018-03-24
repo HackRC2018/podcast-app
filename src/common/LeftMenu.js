@@ -5,6 +5,7 @@ import { Image, Text, View, Button, StyleSheet } from 'react-native';
 import Drawer from 'react-native-drawer';
 import {Actions, DefaultRenderer} from 'react-native-router-flux';
 
+
 // Styles
 const styles = StyleSheet.create({
     container: {
@@ -16,11 +17,11 @@ const styles = StyleSheet.create({
         backgroundColor: '#CC5225'
     },
     iconHeader: {
-        marginTop: 25,
-        marginLeft: 75,
+        marginTop: 28,
+        marginLeft: 85,
         marginBottom: 40,
-        width: 150,
-        height: 30,
+        width: 134,
+        height: 26,
     },
     button: {
         padding: 5,
@@ -48,26 +49,41 @@ class SideMenu extends Component {
     static contextTypes = {
         drawer: PropTypes.object
     };
+    constructor(props) {
+        super(props);
+        this.goTo = this.goTo.bind(this);
+    }
+    goTo(dest) {
+        if (dest === 'browse') {
+            Actions.browse();
+            this.context.drawer.close();
+        } else if (dest === 'landing') {
+            Actions.landing();
+            this.context.drawer.close();
+        } else if (dest === 'settings') {
+            Actions.settings();
+            this.context.drawer.close();
+        }
+    }
     render() {
         return (
             <View style={styles.container}>
                 <View style={styles.header}>
                     <Image style={styles.iconHeader} source={require('../resources/logo_rc_premiere.png')} />
                 </View>
-                <View style={styles.button}><Button color="#808080" style={styles.button} title="À la une" onPress={() => Actions.main()} /></View>
-                <View style={styles.button}><Button color="#808080" style={styles.button} title="Parcourir" onPress={() => Actions.browse()} /></View>
-                <View style={styles.button}><Button color="#808080" style={styles.button} title="Balados" onPress={() => Actions.main()} /></View>
-                <View style={styles.button}><Button color="#808080" style={styles.button} title="Émissions" onPress={() => Actions.main()} /></View>
-                <View style={styles.button}></View>
-                <View style={styles.buttonSeparator}>
-                    <Button color="#808080" style={styles.button} title="Réglages" onPress={() => {this.context.drawer.close(); Actions.settings()}} />
-                </View>
+                <View style={styles.button}><Button color="#808080" style={styles.button} title="En direct" onPress={this.goTo.bind(this, 'landing')} /></View>
+                <View style={styles.button}><Button color="#808080" style={styles.button} title="À la une" onPress={this.goTo.bind(this, 'landing')} /></View>
+                <View style={styles.button}><Button color="#808080" style={styles.button} title="Parcourir" onPress={this.goTo.bind(this, 'browse')} /></View>
+                <View style={styles.button}><Button color="#808080" style={styles.button} title="Balados" onPress={this.goTo.bind(this, 'landing')} /></View>
+                <View style={styles.button}><Button color="#808080" style={styles.button} title="Émissions" onPress={this.goTo.bind(this, 'landing')} /></View>
+                <View style={styles.buttonSeparator}><Button color="#808080" style={styles.button} title="Réglages" onPress={this.goTo.bind(this, 'settings')} /></View>
             </View>
         );
     }
 }
 
-export default class NavigationDrawer extends Component {
+
+class NavigationDrawer extends Component {
     render() {
         const state = this.props.navigationState;
         const children = state.children;
@@ -89,3 +105,5 @@ export default class NavigationDrawer extends Component {
         );
     }
 }
+
+export default NavigationDrawer;

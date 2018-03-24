@@ -1,12 +1,7 @@
 // Lib imports
 import React, { Component } from 'react';
 import { Actions, ActionConst, Scene, Router } from 'react-native-router-flux';
-import {
-    Platform,
-    StyleSheet,
-    Text,
-    View
-} from 'react-native';
+import { Platform, StyleSheet, Text, View } from 'react-native';
 import LeftMenu from './src/common/LeftMenu';
 import NavBar from './src/common/NavBar';
 import BrowseView from './src/BrowseView';
@@ -14,14 +9,13 @@ import LandingView from './src/LandingView';
 import SettingsView from './src/SettingsView';
 
 
-// Scenes
 const scenes = Actions.create(
     <Scene key="root" tabTitle="root">
         <Scene key="main" component={LeftMenu} open={false} type={ActionConst.REPLACE}>
             <Scene key="mainNavbar" navBar={NavBar} drawerImage={require('./src/resources/hamburger.png')} >
                 <Scene key="landing" component={LandingView} title="Hack Ton Podcast" initial />
-                <Scene key="browse" component={BrowseView} title="Hack Ton Podcast" />
-                <Scene key="settings" component={SettingsView} title="Hack Ton Podcast" />
+                <Scene key="browse" component={BrowseView} title="Parcourir" type={ActionConst.REPLACE} />
+                <Scene key="settings" component={SettingsView} title="Réglages" type={ActionConst.REPLACE} />
             </Scene>
         </Scene>
     </Scene>
