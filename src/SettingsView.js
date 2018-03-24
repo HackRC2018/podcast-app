@@ -21,10 +21,6 @@ class SettingsView extends Component {
     clearData() {
         fetch(URL.usersTags, {
             method: 'DELETE'
-        }).then((response) => {
-            // Ok
-        }).catch((error) => {
-            // Error
         });
     }
     render() {

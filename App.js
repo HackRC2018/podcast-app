@@ -15,8 +15,8 @@ const scenes = Actions.create(
         <Scene key="firstPreferences" hideNavBar={true} component={FirstPreferencesView} type={ActionConst.REPLACE}/>
         <Scene key="main" component={LeftMenu} type={ActionConst.REPLACE} initial>
             <Scene key="mainNavbar" navBar={NavBar} drawerImage={require('./src/resources/hamburger.png')} >
-                <Scene key="landing" component={LandingView} title="Hack Ton Podcast" type={ActionConst.REPLACE} />
-                <Scene key="browse" component={BrowseView} title="Parcourir" type={ActionConst.REPLACE} initial />
+                <Scene key="landing" component={LandingView} title="Hack Ton Podcast" type={ActionConst.REPLACE} initial />
+                <Scene key="browse" component={BrowseView} title="Parcourir" type={ActionConst.REPLACE} />
                 <Scene key="settings" component={SettingsView} title="Réglages" type={ActionConst.REPLACE} />
             </Scene>
         </Scene>
