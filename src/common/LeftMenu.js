@@ -55,7 +55,12 @@ class SideMenu extends Component {
     }
     goTo(dest) {
         if (dest === 'browse') {
-            Actions.browse();
+            var firstOpen = true;
+            if (firstOpen) {
+                Actions.firstPreferences();
+            } else {
+                Actions.browse();
+            }
             this.context.drawer.close();
         } else if (dest === 'landing') {
             Actions.landing();
@@ -91,8 +96,8 @@ class NavigationDrawer extends Component {
             <Drawer
                 ref="navigation"
                 open={state.open}
-                onOpen={()=>Actions.refresh({key: state.key, open: true})}
-                onClose={()=>Actions.refresh({key: state.key, open: false})}
+                onOpen={()=>Actions.refresh({open: true})}
+                onClose={()=>Actions.refresh({open: false})}
                 type="displace"
                 content={<SideMenu />}
                 tapToClose={true}

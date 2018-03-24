@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
+import { Platform, StyleSheet, Text, View, Button } from 'react-native';
 
 
 // Styles
@@ -13,16 +13,27 @@ const styles = StyleSheet.create({
 });
 
 
-class LandingView extends Component {
+class SettingsView extends Component {
+    constructor(props) {
+        super(props);
+        this.clearData = this.clearData.bind(this);
+    }
+    clearData() {
+        fetch(URL.usersTags, {
+            method: 'DELETE'
+        }).then((response) => {
+            // Ok
+        }).catch((error) => {
+            // Error
+        });
+    }
     render() {
         return (
             <View style={styles.container}>
-                <Text>
-                    Réglages
-                </Text>
+                <Button title="Remise a zéro des préferences" onPress={this.clearData} />
             </View>
         );
     }
 }
 
-export default LandingView;
+export default SettingsView;

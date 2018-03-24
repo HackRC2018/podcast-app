@@ -5,16 +5,18 @@ import { Platform, StyleSheet, Text, View } from 'react-native';
 import LeftMenu from './src/common/LeftMenu';
 import NavBar from './src/common/NavBar';
 import BrowseView from './src/BrowseView';
+import FirstPreferencesView from './src/FirstPreferencesView';
 import LandingView from './src/LandingView';
 import SettingsView from './src/SettingsView';
 
 
 const scenes = Actions.create(
     <Scene key="root" tabTitle="root">
-        <Scene key="main" component={LeftMenu} open={false}>
+        <Scene key="firstPreferences" hideNavBar={true} component={FirstPreferencesView} type={ActionConst.REPLACE}/>
+        <Scene key="main" component={LeftMenu} type={ActionConst.REPLACE} initial>
             <Scene key="mainNavbar" navBar={NavBar} drawerImage={require('./src/resources/hamburger.png')} >
-                <Scene key="landing" component={LandingView} title="Hack Ton Podcast" type={ActionConst.REPLACE} initial />
-                <Scene key="browse" component={BrowseView} title="Parcourir" type={ActionConst.REPLACE} />
+                <Scene key="landing" component={LandingView} title="Hack Ton Podcast" type={ActionConst.REPLACE} />
+                <Scene key="browse" component={BrowseView} title="Parcourir" type={ActionConst.REPLACE} initial />
                 <Scene key="settings" component={SettingsView} title="Réglages" type={ActionConst.REPLACE} />
             </Scene>
         </Scene>
@@ -35,7 +37,6 @@ export default class App extends Component {
 }
 
 // Styles
-
 const styles = StyleSheet.create({
     navBar: {
         backgroundColor: '#CC5225',
