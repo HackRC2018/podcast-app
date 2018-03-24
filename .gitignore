@@ -57,3 +57,10 @@ typings/
 # dotenv environment variables file
 .env
 
+# Mac
+package-lock.json
+.DS_Store
+
+# React native
+ios/build
+
