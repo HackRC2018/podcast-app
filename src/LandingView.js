@@ -9,15 +9,20 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: '#F0F0F0',
     },
-    image: {
+    imageContainer: {
         flex: 1,
-        marginTop: 60
+        marginTop: 60,
+    },
+    image: {
+        marginTop: 60,
+        height: 210,
+        width: 380
     },
     news: {
         flex: 1,
         paddingLeft: 15,
         paddingRight: 15,
-        paddingTop: 0
+        paddingTop: 15
     },
     title: {
         fontSize: 20,
@@ -38,8 +43,8 @@ class LandingView extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <View style={styles.image}>
-                    <Image source={require('./resources/team.jpg')} />
+                <View style={styles.imageContainner}>
+                    <Image style={styles.image} source={require('./resources/team.jpg')} />
                 </View>
                 <View style={styles.news}>
                     <Text style={styles.title}>

@@ -68,7 +68,8 @@ class FirstPreferencesView extends Component {
         this.confirm = this.confirm.bind(this);
     }
     componentDidMount() {
-        this.fetchTags();
+        // this.fetchTags();
+        this.confirm();
     }
     fetchTags() {
         fetch(URL.tags, {

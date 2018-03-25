@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, Image, ListView } from 'react-native';
 import moment from 'moment';
+import HTMLView from 'react-native-htmlview';
 
 
 // Styles
@@ -19,20 +20,21 @@ const stylesRow = StyleSheet.create({
         padding: 12,
         flexDirection: 'row',
         alignItems: 'center',
-        width: 360
+        width: 350
+    },
+    textContainer: {
+        padding: 10
     },
     title: {
-        marginLeft: 12,
         fontSize: 16
     },
     published: {
-        marginLeft: 12,
         fontSize: 12,
         fontWeight: 'bold'
     },
     summary: {
         marginLeft: 12,
-        fontSize: 12,
+        fontSize: 12
     },
     photo: {
         height: 75,
@@ -40,22 +42,31 @@ const stylesRow = StyleSheet.create({
     },
 });
 
-const Row = (props) => (
-    <View style={stylesRow.container}>
-        <Image source={{ uri: props.data.image}} style={stylesRow.photo} />
-        <View>
-            <View>
-                <Text style={stylesRow.title} numberOfLines={1}>{props.data.title}</Text>
+class Row extends Component {
+    render() {
+        var imageUrl = this.props.data.image_url && this.props.data.image_url !== '' ? {uri: this.props.data.image_url} : require('./resources/default_image.png');
+        var title = this.props.data.title && this.props.data.title.replace(/<\/?[^>]+>/ig, " ");
+        title = title && title.replace(/&nbsp;/ig, " ");
+        return (
+            <View style={stylesRow.container}>
+                <Image source={imageUrl} style={stylesRow.photo} />
+                <View style={stylesRow.textContainer}>
+                    <View>
+                        <Text style={stylesRow.title} numberOfLines={1}>{title}</Text>
+                    </View>
+                    <View>
+                        <Text style={stylesRow.published}>{moment(this.props.data.published).format('MMMM Do YYYY, h:mm')}</Text>
+                    </View>
+                    {/*
+                    <View>
+                        <HTMLView value={this.props.data.summary} />
+                    </View>
+                    */}
+                </View>
             </View>
-            <View>
-                <Text style={stylesRow.published}>{moment(props.data.published).format('MMMM Do YYYY, h:mm')}</Text>
-            </View>
-            <View>
-                <Text style={stylesRow.summary}>{props.data.summary}</Text>
-            </View>
-        </View>
-    </View>
-);
+        );
+    }
+}
 
 class BrowseView extends Component {
     constructor() {
