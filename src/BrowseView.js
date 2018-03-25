@@ -1,7 +1,12 @@
+// Lib imports
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View, Image, ListView } from 'react-native';
+import { Platform, StyleSheet, Text, View, Image, ListView, TouchableOpacity } from 'react-native';
 import moment from 'moment';
 import HTMLView from 'react-native-htmlview';
+import { Actions } from 'react-native-router-flux';
+
+// App imports
+import URL from './common/URL';
 
 
 // Styles
@@ -12,6 +17,16 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#F5FCFF',
+    },
+    headerChange: {
+        width: 380,
+        height: 30,
+        justifyContent: 'center',
+        backgroundColor: 'orange'
+    },
+    headerChangeText: {
+        color: '#FFFFFF',
+        textAlign: 'center'
     }
 });
 const stylesRow = StyleSheet.create({
@@ -39,7 +54,7 @@ const stylesRow = StyleSheet.create({
     photo: {
         height: 75,
         width: 75
-    },
+    }
 });
 
 class Row extends Component {
@@ -64,6 +79,29 @@ class Row extends Component {
                     */}
                 </View>
             </View>
+        );
+    }
+}
+
+class HeaderChangeTags extends Component {
+    constructor() {
+        super();
+        this.onChange = this.onChange.bind(this);
+    }
+    onChange() {
+        fetch(URL.usersTags, {
+            method: 'DELETE'
+        }).catch(() => {
+            Actions.firstPreferences();
+        });
+    }
+    render() {
+        return (
+            <TouchableOpacity onPress={this.onChange}>
+                <View style={styles.headerChange}>
+                    <Text style={styles.headerChangeText}>Peaufiner mes thèmatiques</Text>
+                </View>
+            </TouchableOpacity>
         );
     }
 }
@@ -96,6 +134,7 @@ class BrowseView extends Component {
     render() {
         return (
             <View style={styles.container}>
+                <HeaderChangeTags />
                 <ListView dataSource={this.state.dataSource} renderRow={(data) => <Row data={data} />} />
             </View>
         );

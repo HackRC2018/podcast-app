@@ -29,6 +29,13 @@ const styles = StyleSheet.create({
         fontWeight: '200',
         color: '#FFFFFF',
         textAlign: 'center'
+    },
+    buttonBubble: {
+        color: '#F0F0F0',
+        fontSize: 16,
+        position: 'absolute',
+        top: 610,
+        left: 220
     }
 });
 
@@ -65,11 +72,26 @@ class FirstPreferencesView extends Component {
             tags: [],
             tagSelected: 0
         };
-        this.confirm = this.confirm.bind(this);
+        this.fetchTags = this.fetchTags.bind(this);
+        this.onConfirm = this.onConfirm.bind(this);
     }
     componentDidMount() {
-        // this.fetchTags();
-        this.confirm();
+        fetch(URL.usersTags, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        }).then((response) => {
+            response.json().then((response) => {
+                console.log(response);
+                if (response.tags.length > 0) {
+                    this.onConfirm();
+                } else {
+                    this.fetchTags();
+                }
+            })
+        });
     }
     fetchTags() {
         fetch(URL.tags, {
@@ -86,7 +108,7 @@ class FirstPreferencesView extends Component {
             console.log(error);
         });
     }
-    confirm() {
+    onConfirm() {
         Actions.main();
         Actions.browse();
     }
@@ -108,22 +130,22 @@ class FirstPreferencesView extends Component {
                 tagSelected: this.state.tagSelected + 1
             });
             if (this.state.tagSelected === 5) {
-                this.confirm();
+                this.onConfirm();
             }
-        }).catch((error) => {
-            // Error
         });
     }
     render() {
         var bubbles = this.state.tags.map((tag) => {
             var randomSize = Math.floor((Math.random() * 100) + 50);
-            console.log(tag);
             return (
                 <BubbleButton key={tag._id.$oid} name={tag.label} size={randomSize} onPress={this.onPressTag.bind(this, tag)} />
             );
         });
         return (
             <ImageBackground source={require('./resources/bgBubble.png')} style={styles.backgroundImage}>
+                <TouchableOpacity onPress={this.fetchTags}>
+                    <Text style={styles.buttonBubble}>Plus de bulles</Text>
+                </TouchableOpacity>
                 <View style={styles.header}>
                     <Text style={styles.headerText}>Pointe ce que tu aimes</Text>
                 </View>
