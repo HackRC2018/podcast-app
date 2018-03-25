@@ -49,7 +49,7 @@ class BubbleButton extends Component {
             borderRadius: 400
         };
         var styleText = {
-            fontSize: this.props.size / 4,
+            fontSize: this.props.size / 5,
             fontWeight: '200',
             lineHeight: this.props.size,
             textAlign: 'center',

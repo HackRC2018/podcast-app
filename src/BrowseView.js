@@ -26,7 +26,8 @@ const styles = StyleSheet.create({
     },
     headerChangeText: {
         color: '#FFFFFF',
-        textAlign: 'center'
+        textAlign: 'center',
+        fontWeight: 'bold'
     }
 });
 const stylesRow = StyleSheet.create({
@@ -41,11 +42,12 @@ const stylesRow = StyleSheet.create({
         padding: 10
     },
     title: {
-        fontSize: 16
+        fontSize: 16,
+        fontWeight: 'bold'
     },
     published: {
-        fontSize: 12,
-        fontWeight: 'bold'
+        fontSize: 14,
+        fontWeight: '200'
     },
     summary: {
         marginLeft: 12,
@@ -67,10 +69,10 @@ class Row extends Component {
                 <Image source={imageUrl} style={stylesRow.photo} />
                 <View style={stylesRow.textContainer}>
                     <View>
-                        <Text style={stylesRow.title} numberOfLines={1}>{title}</Text>
+                        <Text style={stylesRow.title}>{title}</Text>
                     </View>
                     <View>
-                        <Text style={stylesRow.published}>{moment(this.props.data.published).format('MMMM Do YYYY, h:mm')}</Text>
+                        <Text style={stylesRow.published}>{moment(this.props.data.broadcastedFirstTimeAt).format('MMMM Do YYYY, h:mm')}</Text>
                     </View>
                     {/*
                     <View>
